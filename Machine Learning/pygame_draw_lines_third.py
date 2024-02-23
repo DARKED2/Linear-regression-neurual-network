@@ -27,19 +27,21 @@ pygame.display.set_caption("Template") # устанавливает заголо
 def linear_regression(points):
     Xs = []
     Ys = []
+    # заполняем наши массивы значениями из массива points
     for index in points:
         Xs.append(index[0])
         Ys.append(index[1])
-        
+
+    #Преобразование обычных массивов Xs,Ys в массив numpy
     Xs =np.array(Xs).reshape(-1, 1)
     Ys = np.array(Ys)
 
-    model = LinearRegression()
+    model = LinearRegression() # вызов функции из библиотеки Sklern
 
     model.fit(Xs, Ys)
     
-    w = model.coef_
-    b = model.intercept_
+    w = model.coef_ # получение значения w
+    b = model.intercept_ # получение значения b
 
     return w,b
 
@@ -97,6 +99,9 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 is_mouse_pressed_left = True
